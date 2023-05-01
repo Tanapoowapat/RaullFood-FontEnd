@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>form</title>
+    <style>
+        /* Mobile styles */
+        .container {
+          width: 100%;
+          padding: 20px;
+        }
+  
+        .card {
+          margin-bottom: 20px;
+          padding: 20px;
+          border: 1px solid #ddd;
+        }
+  
+        /* Tablet styles */
+        @media (min-width: 768px) {
+          .container {
+            max-width: 768px;
+            margin: 0 auto;
+            padding: 40px;
+          }
+  
+          .card {
+            margin-right: 20px;
+            margin-bottom: 0;
+            width: calc(50% - 10px);
+            display: inline-block;
+            vertical-align: top;
+          }
+  
+          .card:last-child {
+            margin-right: 0;
+          }
+        }
+  
+        /* Desktop styles */
+        @media (min-width: 992px) {
+          .container {
+            max-width: 960px;
+          }
+  
+          .card {
+            width: calc(55.33% - 20px);
+          }
+  
+          .card:nth-child(3n+1) {
+            clear: left;
+            margin-left: 0;
+          }
+  
+          .card:nth-child(n+4) {
+            margin-top: 20px;
+          }
+        }
+  
+      </style>
+</head>
+<body>
+    <form action="">
+        <p>
+        <div class="container" style="margin-top: 5%;">
+            <div class="row d-flex justify-content-center align-items-center"> 
+                <div class="card shadow-2-strong" style="border-width: 3px; border-radius: 1rem; padding: 20px;">
+                    <h1 style="text-align: center;"><b>Buy Food Form</b></h1>
+                    <form action="" method="get">
+                        <div class="mb-3">
+                            <label for="Canteen">Select Canteen:</label>
+                            <select class="form-select" name="role" id="Canteen" onchange="changeOptions()">
+                                <option value="" selected>-- Select Canteen --</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Store">Select Store:</label>
+                            <select class="form-select" name="role" id="Store">
+                                <option value="" selected>-- Select Store --</option>
+                                </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Enter your order:</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                              </div>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary" style="height: 45px; width: 150px;">Summit order</button>
+                            <button type="submit" class="btn btn-danger" style="height: 45px; width: 150px;">Cancel</button>
+                        </div>							
+                    </form>
+                </div>
+            </div>
+        </div>
+        </p>
+    </form>
+
+     
+      <script>
+    //เอาไว้เปลี่ยนแปลงร้านตามโรงอาหารที่เลือก อยู่ตรง select
+      function changeOptions() {
+        var Canteen = document.getElementById("Canteen");
+        var Store = document.getElementById("Store");
+        
+        if (Canteen.value === "01") {
+          Store.innerHTML = "<option value='optionA'>Option A</option><option value='optionB'>Option B</option>";
+        } else if (Canteen.value === "02") {
+          Store.innerHTML = "<option value='optionB'>Option B</option><option value='optionC'>Option C</option>";
+        }
+      }
+      </script>
+      
+</body>
+</html>

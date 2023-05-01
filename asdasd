@@ -1,0 +1,16 @@
+		const stores = JSON.parse(localStorage.getItem('Store'));
+		const locations = JSON.parse(localStorage.getItem('Location'));
+		const storeSelect = $('#store');
+		storeSelect.empty(); // Clear existing options
+		storeSelect.append($('<option></option>').attr('value', '').text('-- Select Store --')); // Add default option
+		$.each(stores, function (index, store) {
+			storeSelect.append($('<option></option>').attr('value', store.store_id).text(store.store_name));
+		});
+
+		const locationSelect = $('#location');
+		locationSelect.empty(); // Clear existing options
+		locationSelect.append($('<option></option>').attr('value', '').text('-- Select Location --')); // Add default option
+		$.each(locations, function (index, location) {
+
+			locationSelect.append($('<option></option>').attr('value', location.location_id).text(location.location_name));
+		});
