@@ -12,6 +12,7 @@ $(document).ready(() => {
   const editOrderIDSelect = $("#editorderID");
 
   Promise.all([
+    fetch(url),
     fetch(location_url),
     fetch(store_url),
     fetch(url + `me/`, {
@@ -20,7 +21,7 @@ $(document).ready(() => {
     }),
   ])
     .then((responses) => Promise.all(responses.map((res) => res.json())))
-    .then(([locations, stores, userData]) => {
+    .then(([allusers, locations, stores, userData]) => {
       localStorage.setItem("Location", JSON.stringify(locations));
       localStorage.setItem("Store", JSON.stringify(stores));
       localStorage.setItem("User", JSON.stringify(userData));
@@ -96,14 +97,23 @@ $(document).ready(() => {
               (location) => location.location_id === store.location_id
             );
             const locationName = location ? location.location_name : "-";
+
+            const alluser = allusers.find(
+              (alluser) => alluser.id === order.raider_id
+            );
+            const raider_name = alluser ? alluser.username : "-";
+            const raider_contact = alluser ? alluser.contact : "-";
+
             const row = document.createElement("tr");
             row.innerHTML = `
               <td>${order.order_id}</td>
               <td>${locationName}</td>
               <td>${storeName}</td>
               <td>${order.orderDetails}</td>
-              <td>${order.raider_id ? order.raider_id : "-"}</td>
-              <td><a href="#">Contact</a></td>
+              <td>${raider_name ? raider_name : "-"}</td>
+              <td><a href="${
+                raider_contact ? raider_contact : "#"
+              }">Contact</a></td>
             `;
             orderListBody.append(row);
           });
@@ -239,4 +249,10 @@ $("#editOrderModal").submit((e) => {
     .catch((error) => {
       console.error("ERROR : ", error);
     });
+});
+//OPEN THE NEW TAB WHEN CLICK THE LINK
+$("#orderListBody").on("click", "a", function (event) {
+  event.preventDefault(); // prevent the default action of following the link
+  const link = $(this).attr("href"); // get the link from the clicked <a> element
+  window.open(link); // open the link in a new tab or window
 });

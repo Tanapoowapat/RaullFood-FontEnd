@@ -39,10 +39,8 @@ $("#loginform").submit((event) => {
       localStorage.setItem("token", data.access_token);
       if (parseInt(role) === 2) {
         location.href = "raider.html";
-        alert(role);
       } else if (parseInt(role) === 1) {
         location.href = "food-buy.html";
-        alert(role);
       }
     })
     .catch((error) => {

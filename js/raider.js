@@ -9,6 +9,7 @@ $(document).ready(() => {
   const orderSelect = $("#orderID");
 
   Promise.all([
+    fetch(user_url),
     fetch(location_url),
     fetch(store_url),
     fetch(order_url),
@@ -18,7 +19,7 @@ $(document).ready(() => {
     }),
   ])
     .then((response) => Promise.all(response.map((res) => res.json())))
-    .then(([location, store, order, userData]) => {
+    .then(([allusers, location, store, order, userData]) => {
       localStorage.setItem("Location", JSON.stringify(location));
       localStorage.setItem("Store", JSON.stringify(store));
       localStorage.setItem("Order", JSON.stringify(order));
@@ -37,18 +38,31 @@ $(document).ready(() => {
           (store) => store.store_id == orderItem.store_id
         );
 
+        const alluser = allusers.find(
+          (all_users) => all_users.id === orderItem.user_id
+        );
+
+        const raider = allusers.find(
+          (raider) => raider.id === orderItem.raider_id
+        );
+
         const locationItem = location.find(
           (location) => location.location_id === storeItem.location_id
         );
+
         const locationName = locationItem ? locationItem.location_name : "-";
         const storeName = storeItem ? storeItem.store_name : "-";
+        const Orderby = alluser ? alluser.username : "-";
+        const raidername = raider ? raider.username : "-";
+
         const row = document.createElement("tr");
         row.innerHTML = `
         <td>${orderItem.order_id}</td>
         <td>${locationName}</td>
         <td>${storeName}</td>
         <td>${orderItem.orderDetails}</td>
-        <td>${orderItem.raider_id ? orderItem.raider_id : "-"}</td>
+        <td>${Orderby}</td>
+        <td>${raidername}</td>
         <td><a href="#">Contact</a></td>
         `;
         orderListBody.append(row);
