@@ -12,6 +12,7 @@ $(document).ready(() => {
   const editOrderIDSelect = $("#editorderID");
 
   Promise.all([
+    fetch(order_url),
     fetch(url),
     fetch(location_url),
     fetch(store_url),
@@ -21,10 +22,26 @@ $(document).ready(() => {
     }),
   ])
     .then((responses) => Promise.all(responses.map((res) => res.json())))
-    .then(([allusers, locations, stores, userData]) => {
+    .then(([order, allusers, locations, stores, userData]) => {
       localStorage.setItem("Location", JSON.stringify(locations));
       localStorage.setItem("Store", JSON.stringify(stores));
       localStorage.setItem("User", JSON.stringify(userData));
+
+      const raider_order = order.find(
+        (order) => order.raider_id === userData.id
+      );
+
+      if (raider_order) {
+        localStorage.removeItem("Order");
+        localStorage.removeItem("token");
+        localStorage.removeItem("Store");
+        localStorage.removeItem("Location");
+        localStorage.removeItem("User");
+        localStorage.removeItem("MyOrder");
+        alert("คุณยังมีรายการอาหารที่รับฝากอยู่");
+        window.location.replace("/index.html");
+        return;
+      }
 
       // Populate locations select element
       let locationName = JSON.parse(localStorage.getItem("Location"));

@@ -24,6 +24,22 @@ $(document).ready(() => {
       localStorage.setItem("Store", JSON.stringify(store));
       localStorage.setItem("Order", JSON.stringify(order));
       localStorage.setItem("User", JSON.stringify(userData));
+
+      const userOrder = order.find(
+        (orderItem) => orderItem.user_id === userData.id
+      );
+      if (userOrder) {
+        localStorage.removeItem("Order");
+        localStorage.removeItem("token");
+        localStorage.removeItem("Store");
+        localStorage.removeItem("Location");
+        localStorage.removeItem("User");
+        localStorage.removeItem("MyOrder");
+        alert("คุณยังมีรายการอาหารที่สั่งอยู่");
+        window.location.replace("/index.html");
+        return;
+      }
+
       orderSelect.empty();
       order.forEach((orderItem) => {
         orderSelect.append(
@@ -82,8 +98,6 @@ $("#AcceptOrderModel").submit((e) => {
   thisorder = thisorder.filter(
     (order) => order.order_id === parseInt(order_id)
   );
-
-  console.log(thisorder[0].orderDetails);
 
   if (thisorder[0].raider_id === null) {
     thisorder[0].raider_id = user.id;
