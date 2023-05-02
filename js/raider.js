@@ -70,6 +70,7 @@ $(document).ready(() => {
         const storeName = storeItem ? storeItem.store_name : "-";
         const Orderby = alluser ? alluser.username : "-";
         const raidername = raider ? raider.username : "-";
+        const userContact = alluser ? alluser.contact : "#";
 
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -79,7 +80,7 @@ $(document).ready(() => {
         <td>${orderItem.orderDetails}</td>
         <td>${Orderby}</td>
         <td>${raidername}</td>
-        <td><a href="#">Contact</a></td>
+        <td><a href="${userContact ? alluser.contact : "#"}">Contact</a></td>
         `;
         orderListBody.append(row);
       });
@@ -98,6 +99,9 @@ $("#AcceptOrderModel").submit((e) => {
   thisorder = thisorder.filter(
     (order) => order.order_id === parseInt(order_id)
   );
+
+  console.log(thisorder);
+  console.log(user);
 
   if (thisorder[0].raider_id === null) {
     thisorder[0].raider_id = user.id;

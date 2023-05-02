@@ -1,0 +1,6 @@
+/* set the background image */
+body {
+  background-image: url("https://cdn.discordapp.com/attachments/1071348863891406869/1098122590582743050/wallpaperflare.com_wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

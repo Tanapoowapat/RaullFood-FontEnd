@@ -119,7 +119,7 @@ $(document).ready(() => {
               (alluser) => alluser.id === order.raider_id
             );
             const raider_name = alluser ? alluser.username : "-";
-            const raider_contact = alluser ? alluser.contact : "-";
+            const raider_contact = alluser ? alluser.contact : "#";
 
             const row = document.createElement("tr");
             row.innerHTML = `
