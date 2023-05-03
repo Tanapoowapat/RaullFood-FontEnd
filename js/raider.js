@@ -25,6 +25,8 @@ $(document).ready(() => {
       localStorage.setItem("Order", JSON.stringify(order));
       localStorage.setItem("User", JSON.stringify(userData));
 
+      $("#banner").text(`รายการอาหารทั้งหมด สวัสดีคุณ ${userData.username}`);
+
       const userOrder = order.find(
         (orderItem) => orderItem.user_id === userData.id
       );
@@ -80,7 +82,9 @@ $(document).ready(() => {
         <td>${orderItem.orderDetails}</td>
         <td>${Orderby}</td>
         <td>${raidername}</td>
-        <td><a href="${userContact ? alluser.contact : "#"}">Contact</a></td>
+        <td><a href="${
+          userContact ? alluser.contact : "#"
+        }">ติดต่อผู้ฝากซื้อ</a></td>
         `;
         orderListBody.append(row);
       });

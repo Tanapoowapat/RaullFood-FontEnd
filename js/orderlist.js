@@ -27,6 +27,8 @@ $(document).ready(() => {
       localStorage.setItem("Store", JSON.stringify(stores));
       localStorage.setItem("User", JSON.stringify(userData));
 
+      $("#banner").text(`รายการอาหารของ ${userData.username}`);
+
       const raider_order = order.find(
         (order) => order.raider_id === userData.id
       );
@@ -130,7 +132,7 @@ $(document).ready(() => {
               <td>${raider_name ? raider_name : "-"}</td>
               <td><a href="${
                 raider_contact ? raider_contact : "#"
-              }">Contact</a></td>
+              }">ติดต่อผู้รับฝาก</a></td>
             `;
             orderListBody.append(row);
           });
